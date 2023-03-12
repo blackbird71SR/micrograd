@@ -1,3 +1,5 @@
+import math
+
 class Value:
 
   def __init__(self, data, _children=(), _op=''):
@@ -36,6 +38,26 @@ class Value:
 
     def _backward():
       self.grad += (other * (self.data ** (other-1))) ** out.grad
+    out._backward = _backward
+
+    return out
+
+  def relu(self):
+    out = Value(0 if self.data < 0 else self.data, (self,), f'ReLU')
+
+    def _backward():
+      self.grad += (out.data > 0) * out.grad
+    out._backward = _backward
+
+    return out
+
+  def tanh(self):
+    x = self.data
+    t = (math.exp(2*x)-1)/(math.exp(2*x)+1)
+    out = Value(t, (self,), 'tanh')
+
+    def _backward():
+      self.grad += (1-t**2) * out.grad
     out._backward = _backward
 
     return out
