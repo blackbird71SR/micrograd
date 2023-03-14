@@ -33,7 +33,7 @@ class Value:
     return out
 
   def __pow__(self, other):
-    assert isinstance(other, (int, float), "only supporting int/float powers for now")
+    assert isinstance(other, (int, float)), "only supporting int/float powers for now"
     out = Value(self.data ** other, (self,), f'**{other}')
 
     def _backward():
@@ -65,7 +65,7 @@ class Value:
   def __neg__(self): # -self
     return self * -1
   
-  def _radd__(self, other): # other + self
+  def __radd__(self, other): # other + self
     return self + other
 
   def __sub__(self, other): # self - other
@@ -95,7 +95,7 @@ class Value:
         visited.add(v)
         for child in v._prev:
           build_topo(child)
-        topo.append(child)
+        topo.append(v)
     build_topo(self)
 
     # go one variable at a time and apply the chain rule to get its gradient
