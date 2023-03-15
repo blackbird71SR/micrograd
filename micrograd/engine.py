@@ -15,8 +15,8 @@ class Value:
     out = Value(self.data + other.data, (self, other), '+')
 
     def _backward():
-      self.grad += out.grad
-      other.grad += out.grad 
+      self.grad += 1.0 *out.grad
+      other.grad += 1.0 * out.grad 
     out._backward = _backward
 
     return out
@@ -37,7 +37,7 @@ class Value:
     out = Value(self.data ** other, (self,), f'**{other}')
 
     def _backward():
-      self.grad += (other * (self.data ** (other-1))) ** out.grad
+      self.grad += (other * (self.data ** (other-1))) * out.grad
     out._backward = _backward
 
     return out
