@@ -1,6 +1,6 @@
 # micrograd
 
-The spelled-out intro to neural networks and backpropagation by [@karpathy](https://github.com/karpathy)
+**micrograd** from scratch following "The spelled-out intro to neural networks and backpropagation" by Andrej Kapathy ([@karpathy](https://github.com/karpathy))
 
 - [YouTube Tutorial](https://www.youtube.com/watch?v=VMj-3S1tku0)
 - [GitHub Repo](https://github.com/karpathy/micrograd)
